@@ -16,7 +16,7 @@ export type Post = {
   content: string;
 };
 
-const postsDir = path.join(process.cwd(), 'content', 'posts');
+const postsDir = path.join(process.cwd(), 'posts');
 
 export async function getPostSlugs(): Promise<string[]> {
   const entries = await fs.readdir(postsDir, { withFileTypes: true });
