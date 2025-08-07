@@ -9,17 +9,19 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <header style={{ padding: '1rem', borderBottom: '1px solid #e5e7eb' }}>
-          <nav style={{ display: 'flex', gap: '1rem' }}>
-            <Link href="/">Home</Link>
-            <Link href="/blog">Blog</Link>
+    <html lang="en" className="h-full bg-white text-gray-900 antialiased">
+      <body className="min-h-screen flex flex-col">
+        <header className="border-b border-gray-200">
+          <nav className="mx-auto max-w-3xl flex gap-6 p-4">
+            <Link href="/" className="font-medium hover:text-blue-600">Home</Link>
+            <Link href="/blog" className="font-medium hover:text-blue-600">Blog</Link>
           </nav>
         </header>
-        <main style={{ maxWidth: 800, margin: '0 auto', padding: '2rem 1rem' }}>{children}</main>
-        <footer style={{ padding: '2rem 1rem', borderTop: '1px solid #e5e7eb', marginTop: '2rem' }}>
-          <p style={{ color: '#6b7280' }}>© {new Date().getFullYear()} My Personal Blog</p>
+        <main className="grow mx-auto max-w-3xl w-full p-6 sm:p-8">{children}</main>
+        <footer className="border-t border-gray-200 mt-8">
+          <div className="mx-auto max-w-3xl p-6 sm:p-8 text-sm text-gray-500">
+            © {new Date().getFullYear()} My Personal Blog
+          </div>
         </footer>
       </body>
     </html>

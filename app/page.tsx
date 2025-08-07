@@ -5,21 +5,30 @@ export default async function HomePage() {
   const posts = await getAllPostsMeta();
 
   return (
-    <div>
-      <h1>Welcome to My Blog</h1>
-      <p>This is a minimal Next.js + MDX blog. Explore my latest posts below.</p>
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">Welcome to My Blog</h1>
+        <p className="text-gray-600">This is a minimal Next.js + MDX blog. Explore my latest posts below.</p>
+      </div>
 
-      <h2>Latest Posts</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {posts.map((post) => (
-          <li key={post.slug} style={{ marginBottom: '1rem' }}>
-            <Link href={`/blog/${post.slug}`}>
-              {post.title}
-            </Link>
-            <div style={{ color: '#6b7280', fontSize: '0.9rem' }}>{post.date}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Latest Posts</h2>
+        <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
+          {posts.map((post) => (
+            <li key={post.slug} className="p-4 hover:bg-gray-50 transition-colors">
+              <Link href={`/blog/${post.slug}`} className="block">
+                <div className="font-medium text-blue-700 hover:underline">{post.title}</div>
+                {post.description && (
+                  <p className="text-sm text-gray-600 mt-1">{post.description}</p>
+                )}
+                {post.date && (
+                  <div className="text-xs text-gray-500 mt-2">{String(post.date)}</div>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

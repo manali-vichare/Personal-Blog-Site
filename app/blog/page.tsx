@@ -9,17 +9,21 @@ export default async function BlogIndexPage() {
   const posts = await getAllPostsMeta();
 
   return (
-    <div>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+    <div className="space-y-6">
+      <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
         {posts.map((post) => (
-          <li key={post.slug} style={{ marginBottom: '1.25rem' }}>
-            <h2 style={{ margin: 0 }}>
-              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <li key={post.slug} className="p-4">
+            <h2 className="m-0 text-lg font-semibold">
+              <Link href={`/blog/${post.slug}`} className="text-blue-700 hover:underline">
+                {post.title}
+              </Link>
             </h2>
             {post.description && (
-              <p style={{ color: '#374151', margin: '0.25rem 0' }}>{post.description}</p>
+              <p className="text-gray-700 mt-1">{post.description}</p>
             )}
-            <div style={{ color: '#6b7280', fontSize: '0.9rem' }}>{post.date}</div>
+            {post.date && (
+              <div className="text-xs text-gray-500 mt-2">{String(post.date)}</div>
+            )}
           </li>
         ))}
       </ul>

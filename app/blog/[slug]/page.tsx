@@ -37,12 +37,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   });
 
   return (
-    <article>
-      <h1 style={{ marginBottom: '0.25rem' }}>{frontmatter.title}</h1>
+    <article className="prose prose-slate max-w-none">
+      <h1 className="mb-1">{frontmatter.title}</h1>
       {frontmatter.date && (
-        <div style={{ color: '#6b7280', marginBottom: '1.5rem' }}>{frontmatter.date}</div>
+        <div className="text-sm text-gray-500 mb-6">{String(frontmatter.date)}</div>
       )}
-      <div style={{ lineHeight: 1.8 }}>
+      <div>
         {mdx.content}
       </div>
     </article>
