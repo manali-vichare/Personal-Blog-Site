@@ -40,9 +40,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="grow mx-auto max-w-3xl w-full p-6 sm:p-8">{children}</main>
         <footer className="border-t border-gray-200 mt-8">
           <div className="mx-auto max-w-3xl p-6 sm:p-8 text-sm text-gray-500">
-            <div className="font-medium">In Progress: Learning Out Loud</div>
-            <div className="text-gray-600">Somewhere between SQL and self-growth.</div>
-            <div className="mt-2">© {new Date().getFullYear()}</div>
+            {/* Updated footer text */}
+            © Manali Vichare 2025. All rights reserved.
           </div>
         </footer>
       </body>
