@@ -4,7 +4,6 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkGfm from 'remark-gfm';
 import { getPostSlugs, getPostBySlug } from '../../../lib/posts';
-import { PostSEO } from '../../../components/SEO';
 
 export async function generateStaticParams() {
   const slugs = await getPostSlugs();
@@ -14,10 +13,23 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug);
   if (!post) return {};
+  const canonical = new URL(`/blog/${post.slug}`, 'https://example.com');
+  const description = post.frontmatter.description || post.frontmatter.excerpt;
   return {
     title: post.frontmatter.title,
-    description: post.frontmatter.description || post.frontmatter.excerpt,
-  };
+    description,
+    alternates: { canonical: canonical.toString() },
+    openGraph: {
+      type: 'article',
+      url: canonical.toString(),
+      title: post.frontmatter.title,
+      description,
+      article: {
+        publishedTime: post.frontmatter.date,
+        tags: post.frontmatter.tags,
+      },
+    },
+  } as const;
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
@@ -37,17 +49,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     },
   });
 
-  const canonicalUrl = `https://example.com/blog/${post.slug}`;
-
   return (
     <article className="prose prose-slate max-w-none">
-      <PostSEO
-        title={frontmatter.title}
-        description={frontmatter.description}
-        url={canonicalUrl}
-        date={frontmatter.date}
-        tags={frontmatter.tags}
-      />
       <h1 className="mb-1">{frontmatter.title}</h1>
       <div className="text-sm text-gray-500 mb-4">
         {frontmatter.date ? String(frontmatter.date) : null}
