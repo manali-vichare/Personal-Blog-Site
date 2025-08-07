@@ -39,8 +39,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   return (
     <article className="prose prose-slate max-w-none">
       <h1 className="mb-1">{frontmatter.title}</h1>
-      {frontmatter.date && (
-        <div className="text-sm text-gray-500 mb-6">{String(frontmatter.date)}</div>
+      <div className="text-sm text-gray-500 mb-4">
+        {frontmatter.date ? String(frontmatter.date) : null}
+      </div>
+      {frontmatter.description && (
+        <p className="text-gray-700 not-prose mb-6">{frontmatter.description}</p>
       )}
       <div>
         {mdx.content}
