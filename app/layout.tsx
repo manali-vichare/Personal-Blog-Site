@@ -9,6 +9,10 @@ export const metadata = {
     template: '%s | In Progress: Learning Out Loud',
   },
   description: 'Somewhere between SQL and self-growth.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+  },
   openGraph: {
     type: 'website' as const,
     siteName: 'In Progress: Learning Out Loud',
@@ -40,7 +44,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="grow mx-auto max-w-3xl w-full p-6 sm:p-8">{children}</main>
         <footer className="border-t border-gray-200 mt-8">
           <div className="mx-auto max-w-3xl p-6 sm:p-8 text-sm text-gray-500">
-            {/* Updated footer text */}
             © Manali Vichare 2025. All rights reserved.
           </div>
         </footer>
