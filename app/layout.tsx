@@ -1,6 +1,7 @@
 import './globals.css';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { DefaultSEO } from '../components/SEO';
 
 export const metadata = {
   title: 'My Personal Blog',
@@ -11,6 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="h-full bg-white text-gray-900 antialiased">
       <body className="min-h-screen flex flex-col">
+        <DefaultSEO />
         <header className="border-b border-gray-200">
           <nav className="mx-auto max-w-3xl flex gap-6 p-4">
             <Link href="/" className="font-medium hover:text-blue-600">Home</Link>

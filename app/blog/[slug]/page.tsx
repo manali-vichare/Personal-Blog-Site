@@ -4,6 +4,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkGfm from 'remark-gfm';
 import { getPostSlugs, getPostBySlug } from '../../../lib/posts';
+import { PostSEO } from '../../../components/SEO';
 
 export async function generateStaticParams() {
   const slugs = await getPostSlugs();
@@ -36,8 +37,17 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     },
   });
 
+  const canonicalUrl = `https://example.com/blog/${post.slug}`;
+
   return (
     <article className="prose prose-slate max-w-none">
+      <PostSEO
+        title={frontmatter.title}
+        description={frontmatter.description}
+        url={canonicalUrl}
+        date={frontmatter.date}
+        tags={frontmatter.tags}
+      />
       <h1 className="mb-1">{frontmatter.title}</h1>
       <div className="text-sm text-gray-500 mb-4">
         {frontmatter.date ? String(frontmatter.date) : null}
