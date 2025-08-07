@@ -18,11 +18,11 @@ export default async function BlogIndexPage() {
                 {post.title}
               </Link>
             </h2>
-            {post.description && (
-              <p className="text-gray-700 mt-1">{post.description}</p>
-            )}
             {post.date && (
-              <div className="text-xs text-gray-500 mt-2">{String(post.date)}</div>
+              <div className="text-xs text-gray-500 mt-1">{String(post.date)}</div>
+            )}
+            {post.excerpt && (
+              <p className="text-gray-700 mt-2">{post.excerpt}</p>
             )}
           </li>
         ))}

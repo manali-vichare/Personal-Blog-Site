@@ -37,17 +37,47 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   }
 }
 
-export async function getAllPostsMeta(): Promise<Array<{ slug: string; title: string; date?: string; description?: string }>> {
+function stripMarkdownInline(text: string): string {
+  // Remove code blocks
+  const noCodeBlocks = text.replace(/```[\s\S]*?```/g, '');
+  // Replace images ![alt](url) with alt
+  const noImages = noCodeBlocks.replace(/!\[(.*?)\]\([^)]*\)/g, '$1');
+  // Replace links [text](url) with text
+  const noLinks = noImages.replace(/\[(.*?)\]\([^)]*\)/g, '$1');
+  // Remove headings markers and blockquotes
+  const noHashes = noLinks.replace(/^\s{0,3}#{1,6}\s+/gm, '').replace(/^>\s?/gm, '');
+  // Remove emphasis markers
+  const noEmphasis = noHashes.replace(/[*_`~]/g, '');
+  // Collapse whitespace
+  return noEmphasis.replace(/\s+/g, ' ').trim();
+}
+
+function createExcerpt(content: string, maxLength = 200): string {
+  const paragraphs = content.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+  const candidate = paragraphs[0] ?? '';
+  const cleaned = stripMarkdownInline(candidate);
+  if (cleaned.length <= maxLength) return cleaned;
+  const truncated = cleaned.slice(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(' ');
+  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated).trim() + '…';
+}
+
+export async function getAllPostsMeta(): Promise<Array<{ slug: string; title: string; date?: string; description?: string; excerpt?: string }>> {
   const slugs = await getPostSlugs();
   const posts = await Promise.all(slugs.map((slug) => getPostBySlug(slug)));
   return posts
     .filter((p): p is Post => Boolean(p))
-    .map((p) => ({
-      slug: p.slug,
-      title: p.frontmatter.title,
-      date: p.frontmatter.date,
-      description: p.frontmatter.description || p.frontmatter.excerpt,
-    }))
+    .map((p) => {
+      const description = p.frontmatter.description;
+      const excerpt = description || p.frontmatter.excerpt || createExcerpt(p.content);
+      return {
+        slug: p.slug,
+        title: p.frontmatter.title,
+        date: p.frontmatter.date,
+        description,
+        excerpt,
+      };
+    })
     .sort((a, b) => {
       const aTime = a.date ? Date.parse(a.date) : 0;
       const bTime = b.date ? Date.parse(b.date) : 0;
