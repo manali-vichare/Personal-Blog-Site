@@ -6,9 +6,9 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Welcome to My Blog</h1>
-        <p className="text-gray-600">This is a minimal Next.js + MDX blog. Explore my latest posts below.</p>
+      <div className="space-y-1">
+        <h1 className="text-3xl font-bold tracking-tight">In Progress: Learning Out Loud</h1>
+        <p className="text-gray-600">Somewhere between SQL and self-growth.</p>
       </div>
 
       <div className="space-y-4">
