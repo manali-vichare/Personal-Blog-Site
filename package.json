@@ -20,6 +20,9 @@
     "url": "https://github.com/manali-vichare/Personal-Blog-Site/issues"
   },
   "homepage": "https://github.com/manali-vichare/Personal-Blog-Site#readme",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "next": "^14.2.31",
