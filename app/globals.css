@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/***** Custom tweaks *****/
+article :is(h2, h3, h4, h5, h6) a.anchor {
+  color: inherit;
+}
