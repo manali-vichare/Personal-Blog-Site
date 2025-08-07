@@ -1,0 +1,37 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manali-vichare/Personal-Blog-Site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manali-vichare/Personal-Blog-Site/issues"
+  },
+  "homepage": "https://github.com/manali-vichare/Personal-Blog-Site#readme",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "next": "^14.2.31",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.2.0",
+    "typescript": "5.9.2"
+  }
+}
